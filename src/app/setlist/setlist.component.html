@@ -1,1 +1,32 @@
-<p>setlist works!</p>
+<h1>SETLIST APP</h1>
+
+<div class="example-container">
+  <h3>Set List</h3>
+
+  <div
+    cdkDropList
+    #setlist="cdkDropList"
+    [cdkDropListData]="setList"
+    [cdkDropListConnectedTo]="[songlist]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let song of setList" cdkDrag>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h3>Song List</h3>
+
+  <div
+    cdkDropList
+    #songlist="cdkDropList"
+    [cdkDropListData]="songList"
+    [cdkDropListConnectedTo]="[setlist]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let song of songList" cdkDrag>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+  </div>
+</div>
+<div>
+  <button (click)="showLists()">Show Lists</button>
+</div>
