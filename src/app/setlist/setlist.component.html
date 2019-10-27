@@ -25,7 +25,7 @@
         <td>{{song.artist}}</td>
         <td>{{song.album}}</td>
         <td>{{song.song}}</td>
-        <td>{{song.time}}</td>
+        <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
         <td>
           <button (click)="delete()">Delete</button>
         </td>
@@ -55,7 +55,7 @@
         <td>{{song.artist}}</td>
         <td>{{song.album}}</td>
         <td>{{song.song}}</td>
-        <td>{{song.time}}</td>
+        <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
         <td>
             <button (click)="add()">Add</button>
           </td>
@@ -69,6 +69,9 @@
 </div>
 
 <div class="container">
+  <div>
+    {{ totalSetTime.minutes }}:{{ totalSetTime.seconds }}
+  </div>
   <div>
     <button (click)="showLists()">Show Lists</button>
   </div>

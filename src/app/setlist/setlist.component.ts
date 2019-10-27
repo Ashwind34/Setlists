@@ -8,42 +8,50 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class SetlistComponent implements OnInit {
 
+  //NEED TO CREATE INTERFACE FOR SONG DATA
+
   songList: object[] = [
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Fear Incoculum",
-      time: "10:20"
+      runMinutes: 10,
+      runSeconds: 20
     },
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Pneuma",
-      time: "11:53"
+      runMinutes: 11,
+      runSeconds: 53
     },
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Invincible",
-      time: "12:45"
+      runMinutes: 12,
+      runSeconds: 45
     },
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Descending",
-      time: "13:38"
+      runMinutes: 13,
+      runSeconds: 38
     },
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Culling Voices",
-      time: "10:05"
+      runMinutes: 10,
+      runSeconds: 5
     },
     {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Chocolate Chip Trip",
-      time: "4:48"
+      runMinutes: 4,
+      runSeconds: 48
     },
   ];
 
@@ -52,13 +60,20 @@ export class SetlistComponent implements OnInit {
       artist: "Tool",
       album: "Fear Inoculum",
       song: "7empest",
-      time: "15:44"
+      runMinutes: 15,
+      runSeconds: 44
     }
   ];
+
+  totalSetTime = {
+    minutes: 0,
+    seconds: 0,
+  }
 
   constructor() { }
 
   ngOnInit() {
+    this.calculateSetTime();
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -76,6 +91,7 @@ export class SetlistComponent implements OnInit {
         event.currentIndex
       )
     }
+    this.calculateSetTime();
   }
 
   add() {
@@ -84,6 +100,15 @@ export class SetlistComponent implements OnInit {
 
   delete() {
     console.log("Delete");
+  }
+
+  calculateSetTime() {
+    const setListSeconds = this.setList.reduce((total, song) => {
+      return total + song.runSeconds + song.runMinutes*60
+    }, 0);
+
+    this.totalSetTime.seconds = setListSeconds % 60;
+    this.totalSetTime.minutes = (setListSeconds - this.totalSetTime.seconds) / 60;
   }
 
   showLists() {
