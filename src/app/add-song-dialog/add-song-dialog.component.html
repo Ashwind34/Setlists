@@ -1,2 +1,27 @@
-<p>add-song-dialog works!</p>
+<form [formGroup]="songForm">
+  <label>
+    Artist:
+    <input type="text" formControlName="artist">
+  </label>
+  <label>
+    Album:
+    <input type="text" formControlName="album">
+  </label>
+  <label>
+    Song:
+    <input type="text" formControlName="song">
+  </label>
+  <label>
+    Minutes:
+    <input type="number" formControlName="runMinutes">
+  </label>
+  <label>
+    Seconds:
+    <input type="number" formControlName="runSeconds">
+  </label>
+</form>
+
+
+<button (click)="addSong()">Add Song</button>
+<button (click)="showForm()">Log Form</button>
 <button (click)="closeDialog()">Close</button>

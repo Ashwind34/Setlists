@@ -11,6 +11,7 @@ import {
 import { MatTableModule } from '@angular/material/table';
 import { AddSongDialogComponent } from './add-song-dialog/add-song-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     DragDropModule,
     MatTableModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

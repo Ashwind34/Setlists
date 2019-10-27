@@ -109,7 +109,10 @@ export class SetlistComponent implements OnInit {
       width: '400px',
       height: '400px',
     })
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((song) => {
+      if (song) {
+        this.songList.push(song);
+      }
       console.log('The dialog was closed');
     });
   }
