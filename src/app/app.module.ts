@@ -9,11 +9,17 @@ import {
   DragDropModule
 } from '@angular/cdk/drag-drop';
 import { MatTableModule } from '@angular/material/table';
+import { AddSongDialogComponent } from './add-song-dialog/add-song-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetlistComponent
+    SetlistComponent,
+    AddSongDialogComponent,
+  ],
+  entryComponents: [
+    AddSongDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,6 +27,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     DragDropModule,
     MatTableModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
