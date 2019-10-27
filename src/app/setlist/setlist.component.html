@@ -11,7 +11,10 @@
       [cdkDropListConnectedTo]="[songlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of setList" cdkDrag>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+      <div class="example-box" *ngFor="let song of setList" cdkDrag>
+        <div>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+        <button (click)="delete()">Delete</button>
+      </div>
     </div>
   </div>
 
@@ -24,7 +27,11 @@
       [cdkDropListConnectedTo]="[setlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of songList" cdkDrag>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+      <div class="example-box" *ngFor="let song of songList" cdkDrag>
+          <div>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
+          <button (click)="add()">Add</button>
+          <button (click)="delete()">Delete</button>
+        </div>
     </div>
   </div>
 

@@ -78,6 +78,14 @@ export class SetlistComponent implements OnInit {
     }
   }
 
+  add() {
+    console.log("Add");
+  }
+
+  delete() {
+    console.log("Delete");
+  }
+
   showLists() {
     console.log("Song List")
     console.log(this.songList);
