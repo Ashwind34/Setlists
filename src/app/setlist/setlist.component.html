@@ -4,35 +4,66 @@
 
   <div class="example-container">
     <h3>Set List</h3>
-    <div
+    <table
       cdkDropList
       #setlist="cdkDropList"
       [cdkDropListData]="setList"
       [cdkDropListConnectedTo]="[songlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of setList" cdkDrag>
-        <div>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
-        <button (click)="delete()">Delete</button>
-      </div>
-    </div>
+      <tr class="row">
+        <th></th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Song</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+      <!-- <div class="example-box" *ngFor="let song of setList; let i = index" cdkDrag> -->
+      <tr class="row" *ngFor="let song of setList; let i = index" cdkDrag>
+        <td>{{i+1}}.</td>
+        <td>{{song.artist}}</td>
+        <td>{{song.album}}</td>
+        <td>{{song.song}}</td>
+        <td>{{song.time}}</td>
+        <td>
+          <button (click)="delete()">Delete</button>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="example-container">
     <h3>Song List</h3>
-    <div
+    <table
       cdkDropList
       #songlist="cdkDropList"
       [cdkDropListData]="songList"
       [cdkDropListConnectedTo]="[setlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of songList" cdkDrag>
-          <div>{{song.artist}} | {{song.album}} | {{song.song}} | {{song.time}}</div>
-          <button (click)="add()">Add</button>
+      <tr>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Song</th>
+        <th>Time</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <!-- <div class="example-box" *ngFor="let song of setList; let i = index" cdkDrag> -->
+      <tr class="example-box" *ngFor="let song of songList" cdkDrag>
+        <td>{{song.artist}}</td>
+        <td>{{song.album}}</td>
+        <td>{{song.song}}</td>
+        <td>{{song.time}}</td>
+        <td>
+            <button (click)="add()">Add</button>
+          </td>
+        <td>
           <button (click)="delete()">Delete</button>
-        </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
 
 </div>
