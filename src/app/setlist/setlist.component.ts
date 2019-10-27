@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-setlist',
@@ -77,7 +80,7 @@ export class SetlistComponent implements OnInit {
     seconds: 0,
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.calculateSetTime();
@@ -99,6 +102,16 @@ export class SetlistComponent implements OnInit {
       )
     }
     this.calculateSetTime();
+  }
+
+  openSongDialog() {
+    const dialogRef = this.dialog.open(AddSongDialogComponent, {
+      width: '400px',
+      height: '400px',
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 
   add(song, index) {
