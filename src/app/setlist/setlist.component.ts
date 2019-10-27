@@ -10,8 +10,9 @@ export class SetlistComponent implements OnInit {
 
   //NEED TO CREATE INTERFACE FOR SONG DATA
 
-  songList: object[] = [
+  songList = [
     {
+      id: 1,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Fear Incoculum",
@@ -19,6 +20,7 @@ export class SetlistComponent implements OnInit {
       runSeconds: 20
     },
     {
+      id: 2,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Pneuma",
@@ -26,6 +28,7 @@ export class SetlistComponent implements OnInit {
       runSeconds: 53
     },
     {
+      id: 3,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Invincible",
@@ -33,6 +36,7 @@ export class SetlistComponent implements OnInit {
       runSeconds: 45
     },
     {
+      id: 4,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Descending",
@@ -40,6 +44,7 @@ export class SetlistComponent implements OnInit {
       runSeconds: 38
     },
     {
+      id: 5,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Culling Voices",
@@ -47,6 +52,7 @@ export class SetlistComponent implements OnInit {
       runSeconds: 5
     },
     {
+      id: 6,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "Chocolate Chip Trip",
@@ -55,8 +61,9 @@ export class SetlistComponent implements OnInit {
     },
   ];
 
-  setList: object[] = [
+  setList = [
     {
+      id: 7,
       artist: "Tool",
       album: "Fear Inoculum",
       song: "7empest",
@@ -94,12 +101,20 @@ export class SetlistComponent implements OnInit {
     this.calculateSetTime();
   }
 
-  add() {
-    console.log("Add");
+  add(song, index) {
+    this.setList.push(song);
+    this.songList.splice(index, 1);
+    this.calculateSetTime();
   }
 
-  delete() {
-    console.log("Delete");
+  deleteFromSet(song, index) {
+    this.songList.push(song);
+    this.setList.splice(index, 1);
+    this.calculateSetTime();
+  }
+
+  deleteFromList() {
+    console.log("delete from list");
   }
 
   calculateSetTime() {

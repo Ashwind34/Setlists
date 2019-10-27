@@ -19,7 +19,6 @@
         <th>Time</th>
         <th></th>
       </tr>
-      <!-- <div class="example-box" *ngFor="let song of setList; let i = index" cdkDrag> -->
       <tr class="row" *ngFor="let song of setList; let i = index" cdkDrag>
         <td>{{i+1}}.</td>
         <td>{{song.artist}}</td>
@@ -27,7 +26,7 @@
         <td>{{song.song}}</td>
         <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
         <td>
-          <button (click)="delete()">Delete</button>
+          <button (click)="deleteFromSet(song, i)">Delete</button>
         </td>
       </tr>
     </table>
@@ -50,17 +49,16 @@
         <th></th>
         <th></th>
       </tr>
-      <!-- <div class="example-box" *ngFor="let song of setList; let i = index" cdkDrag> -->
-      <tr class="example-box" *ngFor="let song of songList" cdkDrag>
+      <tr class="example-box" *ngFor="let song of songList, let i = index" cdkDrag>
         <td>{{song.artist}}</td>
         <td>{{song.album}}</td>
         <td>{{song.song}}</td>
         <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
         <td>
-            <button (click)="add()">Add</button>
+            <button (click)="add(song, i)">Add</button>
           </td>
         <td>
-          <button (click)="delete()">Delete</button>
+          <button (click)="deleteFromList()">Delete</button>
         </td>
       </tr>
     </table>
