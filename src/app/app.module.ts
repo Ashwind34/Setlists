@@ -12,6 +12,9 @@ import { MatTableModule } from '@angular/material/table';
 import { AddSongDialogComponent } from './add-song-dialog/add-song-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
