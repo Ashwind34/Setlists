@@ -24,10 +24,6 @@ export class AddSongDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  showForm() {
-    console.log(this.songForm);
-  }
-
   addSong() {
     this.dialogRef.close(this.songForm.value);
   }
