@@ -13,6 +13,7 @@ h1 {
   display: inline-block;
   vertical-align: top;
   text-align: center;
+  width: 40%;
 }
 
 .example-list {
@@ -22,16 +23,6 @@ h1 {
   border-radius: 4px;
   overflow: hidden;
   display: block;
-}
-
-.row, tr {
-  padding: 20px 10px;
-  border: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  box-sizing: border-box;
-  cursor: move;
-  background: white;
-  font-size: 14px;
 }
 
 .cdk-drag-preview {
@@ -57,3 +48,21 @@ h1 {
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+mat-card-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-card-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 567px) {
+  .example-container {
+    width: auto
+  }
+}
+

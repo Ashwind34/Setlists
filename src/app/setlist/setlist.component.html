@@ -1,79 +1,58 @@
 <h1>SETLIST APP</h1>
+<h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds }}</h3>
 
 <div class="container">
 
   <div class="example-container">
     <h3>Set List</h3>
-    <table
+    <div
       cdkDropList
       #setlist="cdkDropList"
       [cdkDropListData]="setList"
       [cdkDropListConnectedTo]="[songlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <tr class="row">
-        <th></th>
-        <th>Artist</th>
-        <th>Album</th>
-        <th>Song</th>
-        <th>Time</th>
-        <th></th>
-      </tr>
-      <tr class="row" *ngFor="let song of setList; let i = index" cdkDrag>
-        <td>{{i+1}}.</td>
-        <td>{{song.artist}}</td>
-        <td>{{song.album}}</td>
-        <td>{{song.song}}</td>
-        <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
-        <td>
-          <button (click)="deleteFromSet(song, i)">Delete</button>
-        </td>
-      </tr>
-    </table>
+      <div class="example-box" *ngFor="let song of setList, let i = index" cdkDrag>
+        <mat-card>
+          <mat-card-title>{{song.artist}}</mat-card-title>
+          <mat-card-content>
+            <div>{{song.song}}</div>
+            <div>{{song.album}}</div>
+            <div>{{song.runMinutes}}:{{song.runSeconds | number : '2.0-0'}}</div>
+            <button (click)="deleteFromSet(song, i)">Delete</button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 
   <div class="example-container">
-    <h3>Song List</h3>
-    <table
+    <h3>Song List
+      <button (click)="openSongDialog()">Add A Song</button>
+    </h3>
+    <div
       cdkDropList
       #songlist="cdkDropList"
       [cdkDropListData]="songList"
       [cdkDropListConnectedTo]="[setlist]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <tr>
-        <th>Artist</th>
-        <th>Album</th>
-        <th>Song</th>
-        <th>Time</th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr class="example-box" *ngFor="let song of songList, let i = index" cdkDrag>
-        <td>{{song.artist}}</td>
-        <td>{{song.album}}</td>
-        <td>{{song.song}}</td>
-        <td>{{song.runMinutes}}:{{song.runSeconds}}</td>
-        <td>
-            <button (click)="add(song, i)">Add</button>
-          </td>
-        <td>
-          <button (click)="deleteFromList()">Delete</button>
-        </td>
-      </tr>
-    </table>
+      <div class="example-box" *ngFor="let song of songList, let i = index" cdkDrag>
+        <mat-card>
+          <mat-card-title>{{song.artist}}</mat-card-title>
+          <mat-card-content>
+            <div>{{song.song}}</div>
+            <div>{{song.album}}</div>
+            <div>{{song.runMinutes}}:{{song.runSeconds}}</div>
+            <div>
+              <button (click)="add(song, i)">Add</button>
+              <button (click)="deleteFromList()">Delete</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<div class="container">
-  <div>
-    {{ totalSetTime.minutes }}:{{ totalSetTime.seconds }}
-  </div>
-  <div>
-    <button (click)="showLists()">Show Lists</button>
-  </div>
-  <div>
-    <button (click)="openSongDialog()">Add A Song</button>
-  </div>
-</div>

@@ -137,11 +137,4 @@ export class SetlistComponent implements OnInit {
     this.totalSetTime.seconds = setListSeconds % 60;
     this.totalSetTime.minutes = (setListSeconds - this.totalSetTime.seconds) / 60;
   }
-
-  showLists() {
-    console.log("Song List")
-    console.log(this.songList);
-    console.log("Set List")
-    console.log(this.setList)
-  }
 }
