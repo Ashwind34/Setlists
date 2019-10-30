@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
 
+
 @Component({
   selector: 'app-setlist',
   templateUrl: './setlist.component.html',
@@ -84,6 +85,11 @@ export class SetlistComponent implements OnInit {
   ngOnInit() {
     this.calculateSetTime();
   }
+
+  showSong(song) {
+    console.log(song);
+  }
+
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.container === event.previousContainer) {
