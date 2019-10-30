@@ -1,5 +1,5 @@
 <h1>SETLIST APP</h1>
-<h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds }}</h3>
+<h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h3>
 
 <div class="container">
 
@@ -18,7 +18,7 @@
           <mat-card-content>
             <div>{{song.song}}</div>
             <div>{{song.album}}</div>
-            <div>{{song.runMinutes}}:{{song.runSeconds | number : '2.0-0'}}</div>
+            <div>{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
             <button (click)="deleteFromSet(song, i)">Delete</button>
           </mat-card-content>
         </mat-card>
@@ -43,10 +43,11 @@
           <mat-card-content>
             <div>{{song.song}}</div>
             <div>{{song.album}}</div>
-            <div>{{song.runMinutes}}:{{song.runSeconds}}</div>
+            <div>{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
             <div>
               <button (click)="add(song, i)">Add</button>
               <button (click)="deleteFromList()">Delete</button>
+              <button (click)="showSong(song)">Show Song</button>
             </div>
           </mat-card-content>
         </mat-card>
