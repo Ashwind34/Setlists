@@ -60,6 +60,18 @@ mat-card-content {
   justify-content: space-evenly;
 }
 
+mat-icon.green {
+  color: green;
+}
+
+mat-icon.red{
+  color: red;
+}
+
+mat-icon:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 567px) {
   .example-container {
     width: auto

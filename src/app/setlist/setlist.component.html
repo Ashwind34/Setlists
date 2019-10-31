@@ -19,7 +19,9 @@
             <div>{{song.song}}</div>
             <div>{{song.album}}</div>
             <div>{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
-            <button (click)="deleteFromSet(song, i)">Delete</button>
+            <div>
+              <mat-icon class="red"(click)="deleteFromSet(song, i)">delete</mat-icon>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
@@ -45,8 +47,8 @@
             <div>{{song.album}}</div>
             <div>{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
             <div>
-              <button (click)="add(song, i)">Add</button>
-              <button (click)="deleteFromList()">Delete</button>
+              <mat-icon class="green" (click)="add(song, i)">add_box</mat-icon>
+              <mat-icon class="red" (click)="deleteFromList()">delete</mat-icon>
             </div>
           </mat-card-content>
         </mat-card>
