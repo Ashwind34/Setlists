@@ -23,7 +23,6 @@ h1 {
 }
 
 .list.songList {
-  // min-height: 60vh;
   max-height: 70vh;
   overflow: auto;
 }
@@ -35,6 +34,7 @@ h1 {
   border-radius: 4px;
   overflow: hidden;
   display: block;
+  margin-bottom: 1.5rem;
 }
 
 .titlebox {
@@ -109,8 +109,8 @@ mat-icon:hover {
 }
 
 @media only screen and (max-width: 567px) {
-  .example-container {
-    width: auto
+  .list-container {
+    width: 90vw;
   }
 }
 
