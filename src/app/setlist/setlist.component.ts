@@ -28,17 +28,6 @@ export class SetlistComponent implements OnInit {
     this.loadSongs(1);
   }
 
-  showSong(song) {
-    console.log(song);
-  }
-
-  getSongs(id) {
-    this.songService.getSongs(id)
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
-
   loadSongs(id) {
     this.songService.getSongs(id)
       .subscribe((response: Song[]) => {
