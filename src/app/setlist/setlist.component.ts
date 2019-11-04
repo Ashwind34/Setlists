@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
+import { SongService } from '../services/song.service';
 
 
 @Component({
@@ -13,74 +14,78 @@ export class SetlistComponent implements OnInit {
 
   //NEED TO CREATE INTERFACE FOR SONG DATA
 
-  songList = [
-    {
-      id: 1,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Fear Incoculum",
-      runMinutes: 10,
-      runSeconds: 20
-    },
-    {
-      id: 2,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Pneuma",
-      runMinutes: 11,
-      runSeconds: 53
-    },
-    {
-      id: 3,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Invincible",
-      runMinutes: 12,
-      runSeconds: 45
-    },
-    {
-      id: 4,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Descending",
-      runMinutes: 13,
-      runSeconds: 38
-    },
-    {
-      id: 5,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Culling Voices",
-      runMinutes: 10,
-      runSeconds: 5
-    },
-    {
-      id: 6,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "Chocolate Chip Trip",
-      runMinutes: 4,
-      runSeconds: 48
-    },
-  ];
+  // songList = [
+  //   {
+  //     id: 1,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Fear Incoculum",
+  //     runMinutes: 10,
+  //     runSeconds: 20
+  //   },
+  //   {
+  //     id: 2,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Pneuma",
+  //     runMinutes: 11,
+  //     runSeconds: 53
+  //   },
+  //   {
+  //     id: 3,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Invincible",
+  //     runMinutes: 12,
+  //     runSeconds: 45
+  //   },
+  //   {
+  //     id: 4,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Descending",
+  //     runMinutes: 13,
+  //     runSeconds: 38
+  //   },
+  //   {
+  //     id: 5,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Culling Voices",
+  //     runMinutes: 10,
+  //     runSeconds: 5
+  //   },
+  //   {
+  //     id: 6,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "Chocolate Chip Trip",
+  //     runMinutes: 4,
+  //     runSeconds: 48
+  //   },
+  // ];
 
-  setList = [
-    {
-      id: 7,
-      artist: "Tool",
-      album: "Fear Inoculum",
-      song: "7empest",
-      runMinutes: 15,
-      runSeconds: 44
-    }
-  ];
+  // setList = [
+  //   {
+  //     id: 7,
+  //     artist: "Tool",
+  //     album: "Fear Inoculum",
+  //     song: "7empest",
+  //     runMinutes: 15,
+  //     runSeconds: 44
+  //   }
+  // ];
+
+  songList = [];
+
+  setList = [];
 
   totalSetTime = {
     minutes: 0,
     seconds: 0,
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public songService: SongService) { }
 
   ngOnInit() {
     this.calculateSetTime();
@@ -88,6 +93,13 @@ export class SetlistComponent implements OnInit {
 
   showSong(song) {
     console.log(song);
+  }
+
+  getSongs(id) {
+    this.songService.getSongs(id)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
 

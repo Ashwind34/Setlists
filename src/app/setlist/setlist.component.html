@@ -1,10 +1,13 @@
 <h1>SETLIST APP</h1>
-<h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h3>
+<!-- <h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h3> -->
 
 <div class="container">
 
   <div class="example-container">
-    <h3>Set List</h3>
+    <div class="titlebox">
+      <h3>Set List</h3>
+      <h4>Current Runtume: {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h4>
+    </div>
     <div
       cdkDropList
       #setlist="cdkDropList"
@@ -29,9 +32,11 @@
   </div>
 
   <div class="example-container">
-    <h3>Song List
-      <button (click)="openSongDialog()">Add A Song</button>
-    </h3>
+    <div class="titlebox">
+      <h3>Song List</h3>
+      <button mat-stroked-button (click)="getSongs(1)">Get Songs</button>
+      <button mat-stroked-button (click)="openSongDialog()">Add A Song</button>
+    </div>
     <div
       cdkDropList
       #songlist="cdkDropList"
