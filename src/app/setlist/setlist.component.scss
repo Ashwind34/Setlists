@@ -8,12 +8,19 @@ h1 {
   justify-content: space-evenly;
 }
 
-.example-container {
+.list-container {
   margin: 1rem;
   display: inline-block;
   vertical-align: top;
   text-align: center;
   width: 40%;
+  min-height: 60%;
+  border: solid 1px #ccc;
+}
+
+.list-container.songList {
+  max-height: 75%;
+  overflow: scroll;
 }
 
 .example-list {
@@ -58,6 +65,14 @@ h1 {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.songData {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}
+
 button {
   color: rgb(161, 161, 68);
   height: 60%;
@@ -66,13 +81,14 @@ button {
 
 mat-card-title {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
 }
 
 mat-card-content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   justify-content: space-evenly;
+  grid-template-columns: repeat(3, 1fr)
 }
 
 mat-icon.green {
