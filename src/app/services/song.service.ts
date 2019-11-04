@@ -15,4 +15,12 @@ export class SongService {
     return this.http.get(`${this.url}?${filter}`);
   }
 
+  addSong(song) {
+    return this.http.post(this.url, song);
+  }
+
+  deleteSong(id) {
+    return this.http.delete(`${this.url}/${id}`)
+  }
+
 }

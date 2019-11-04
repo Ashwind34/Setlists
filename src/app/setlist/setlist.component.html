@@ -1,4 +1,5 @@
 <h1>SETLIST APP</h1>
+<h2 style="color:red" *ngIf="saveMessage">{{saveMessage}}</h2>
 
 <div class="container">
 
@@ -36,6 +37,7 @@
     <div class="titlebox">
       <h3>Song List</h3>
       <button mat-stroked-button (click)="openSongDialog()">Add A Song</button>
+      <button mat-stroked-button (click)="save()">Save Lists</button>
     </div>
     <div
       cdkDropList
@@ -52,7 +54,7 @@
             <div class="songData">{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
             <div class="songData">
               <mat-icon class="green" (click)="add(song, i)">add_box</mat-icon>
-              <mat-icon class="red" (click)="deleteFromList()">delete</mat-icon>
+              <mat-icon class="red" (click)="deleteFromList(song, i)">delete</mat-icon>
             </div>
           </mat-card-content>
         </mat-card>

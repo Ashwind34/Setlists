@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
 import { SongService } from '../services/song.service';
 import { Song } from '../interfaces/song';
+import { Observable, forkJoin } from 'rxjs';
 
 
 @Component({
@@ -17,15 +18,19 @@ export class SetlistComponent implements OnInit {
 
   setList = [];
 
+  saveMessage: string;
+
   totalSetTime = {
     minutes: 0,
     seconds: 0,
   }
 
+  userId = 1
+
   constructor(public dialog: MatDialog, public songService: SongService) { }
 
   ngOnInit() {
-    this.loadSongs(1);
+    this.loadSongs(this.userId);
   }
 
   loadSongs(id) {
@@ -78,8 +83,43 @@ export class SetlistComponent implements OnInit {
     this.calculateSetTime();
   }
 
-  deleteFromList() {
-    console.log("delete from list");
+  //NEED TO ADD LOGIC TO HANDLE CHANGE IN ORDER, OR SONG EDIT
+
+  save() {
+    const saveRequests: Observable<any>[] = [];
+    this.setList.forEach((song: Song, index) => {
+      if (song.id == null) {
+        const { id, ...songData } = song;
+        songData.setOrder = index;
+        songData.listOrder = 0;
+        songData.onSetlist = 1;
+        songData.userId = this.userId;
+        saveRequests.push(this.songService.addSong(songData));
+      }
+    });
+    this.songList.forEach((song: Song, index) => {
+      if (song.id  == null) {
+        const { id, ...songData } = song;
+        songData.setOrder = 0
+        songData.listOrder = index;
+        songData.onSetlist = 0;
+        songData.userId = this.userId;
+        saveRequests.push(this.songService.addSong(songData))
+      }
+    });
+    forkJoin(saveRequests).subscribe(() => {
+      this.saveMessage = "Your lists have been saved!"
+    })
+  }
+
+  deleteFromList(song, index) {
+    this.songList.splice(index, 1);
+    if (song.id != null) {
+      this.songService.deleteSong(song.id)
+        .subscribe(() => {
+          this.saveMessage = "Song deleted!"
+        })
+    }
   }
 
   calculateSetTime() {
