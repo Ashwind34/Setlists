@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
 import { SongService } from '../services/song.service';
+import { Song } from '../interfaces/song';
 
 
 @Component({
@@ -89,6 +90,7 @@ export class SetlistComponent implements OnInit {
 
   ngOnInit() {
     this.calculateSetTime();
+    this.loadSongs(1);
   }
 
   showSong(song) {
@@ -100,6 +102,15 @@ export class SetlistComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
       });
+  }
+
+  loadSongs(id) {
+    this.songService.getSongs(id)
+      .subscribe((response: Song[]) => {
+        response.forEach((item) => {
+          item.onSetlist === 1 ? this.setList.push(item) : this.songList.push(item);
+        })
+      })
   }
 
 
