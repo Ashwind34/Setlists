@@ -1,5 +1,4 @@
 <h1>SETLIST APP</h1>
-<!-- <h3 style="text-align: center;">Current Runtume - {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h3> -->
 
 <div class="container">
 
@@ -13,11 +12,14 @@
       #setlist="cdkDropList"
       [cdkDropListData]="setList"
       [cdkDropListConnectedTo]="[songlist]"
-      class="example-list"
+      class="list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of setList, let i = index" cdkDrag>
+      <div class="songCard" *ngFor="let song of setList, let i = index" cdkDrag>
         <mat-card>
-          <mat-card-title><span *ngIf="song.artist">{{song.artist}} -&nbsp;</span>{{song.name}}</mat-card-title>
+          <mat-card-title>
+            <span *ngIf="song.artist">{{song.artist}} -&nbsp;</span>
+            {{song.name}}
+          </mat-card-title>
           <mat-card-content class="setList">
             <div class="songData">{{song.album}}</div>
             <div class="songData">{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
@@ -41,9 +43,9 @@
       #songlist="cdkDropList"
       [cdkDropListData]="songList"
       [cdkDropListConnectedTo]="[setlist]"
-      class="example-list"
+      class="list songList"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let song of songList, let i = index" cdkDrag>
+      <div class="songCard" *ngFor="let song of songList, let i = index" cdkDrag>
         <mat-card>
           <mat-card-title><span *ngIf="song.artist">{{song.artist}} -&nbsp;</span> {{song.name}}</mat-card-title>
           <mat-card-content class="songList">
