@@ -13,70 +13,6 @@ import { Song } from '../interfaces/song';
 })
 export class SetlistComponent implements OnInit {
 
-  //NEED TO CREATE INTERFACE FOR SONG DATA
-
-  // songList = [
-  //   {
-  //     id: 1,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Fear Incoculum",
-  //     runMinutes: 10,
-  //     runSeconds: 20
-  //   },
-  //   {
-  //     id: 2,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Pneuma",
-  //     runMinutes: 11,
-  //     runSeconds: 53
-  //   },
-  //   {
-  //     id: 3,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Invincible",
-  //     runMinutes: 12,
-  //     runSeconds: 45
-  //   },
-  //   {
-  //     id: 4,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Descending",
-  //     runMinutes: 13,
-  //     runSeconds: 38
-  //   },
-  //   {
-  //     id: 5,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Culling Voices",
-  //     runMinutes: 10,
-  //     runSeconds: 5
-  //   },
-  //   {
-  //     id: 6,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "Chocolate Chip Trip",
-  //     runMinutes: 4,
-  //     runSeconds: 48
-  //   },
-  // ];
-
-  // setList = [
-  //   {
-  //     id: 7,
-  //     artist: "Tool",
-  //     album: "Fear Inoculum",
-  //     song: "7empest",
-  //     runMinutes: 15,
-  //     runSeconds: 44
-  //   }
-  // ];
-
   songList = [];
 
   setList = [];
@@ -89,7 +25,6 @@ export class SetlistComponent implements OnInit {
   constructor(public dialog: MatDialog, public songService: SongService) { }
 
   ngOnInit() {
-    this.calculateSetTime();
     this.loadSongs(1);
   }
 
@@ -109,10 +44,10 @@ export class SetlistComponent implements OnInit {
       .subscribe((response: Song[]) => {
         response.forEach((item) => {
           item.onSetlist === 1 ? this.setList.push(item) : this.songList.push(item);
+          this.calculateSetTime();
         })
       })
   }
-
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.container === event.previousContainer) {
