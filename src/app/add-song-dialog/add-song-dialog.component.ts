@@ -33,7 +33,7 @@ export class AddSongDialogComponent implements OnInit {
       id: [null],
       artist: [null],
       album: [null],
-      song: [null],
+      name: [null],
       runMinutes: [null],
       runSeconds: [null],
     });
