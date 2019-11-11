@@ -16,7 +16,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
 } from '@angular/material';
 import { UserformComponent } from './userform/userform.component';
 import { RegisterComponent } from './register/register.component';
