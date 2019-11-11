@@ -21,6 +21,7 @@ import {
 import { UserformComponent } from './userform/userform.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { UserService } from './services/user.service';
 
 
 
@@ -52,7 +53,7 @@ import { LoginComponent } from './login/login.component';
     MatIconModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

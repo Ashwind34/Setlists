@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserformComponent } from '../userform/userform.component';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +16,10 @@ export class LoginComponent implements OnInit {
 
   goToSetlist() {
     this.router.navigate(['/setlist']);
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 
 }

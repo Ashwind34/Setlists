@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-userform',
@@ -7,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./userform.component.scss']
 })
 export class UserformComponent implements OnInit {
+
+  @Input() login: boolean;
 
   userForm: FormGroup;
 
@@ -31,8 +35,9 @@ export class UserformComponent implements OnInit {
     console.log(this.userForm)
   }
 
-
-
-
+  toggleLogin() {
+    this.login = !this.login;
+    console.log(this.login)
+  }
 
 }
