@@ -1,4 +1,22 @@
-<p>register works!</p>
-<app-userform [login]="false"></app-userform>
-<button mat-button (click)="goToSetlist()">Go To Setlist</button><br>
-<button mat-button (click)="goToLogin()">Go To Login</button>
+<div class="container h-100">
+  <div class="row h-100 align-items-center">
+    <div class="col">
+      <div class="row justify-content-center">
+        <h1>Please Register</h1>
+      </div>
+      <div class="row justify-content-center">
+        <app-userform [login]="false"></app-userform>
+      </div>
+      <div class="row justify-content-center">
+        <button mat-button (click)="goToSetlist()">Go To Setlist</button>
+        <button mat-button (click)="goToLogin()">Go To Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
