@@ -18,6 +18,9 @@ import {
   MatInputModule,
   MatButtonModule
 } from '@angular/material';
+import { UserformComponent } from './userform/userform.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -26,9 +29,13 @@ import {
     AppComponent,
     SetlistComponent,
     AddSongDialogComponent,
+    UserformComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   entryComponents: [
     AddSongDialogComponent,
+    UserformComponent,
   ],
   imports: [
     BrowserModule,
