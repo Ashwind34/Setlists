@@ -11,6 +11,8 @@ export class AddSongDialogComponent implements OnInit {
 
   songForm: FormGroup;
 
+  formType: string = 'song';
+
   constructor(
     public dialogRef: MatDialogRef<AddSongDialogComponent>,
     private fb: FormBuilder,
@@ -37,6 +39,10 @@ export class AddSongDialogComponent implements OnInit {
       runMinutes: [null],
       runSeconds: [null],
     });
+  }
+
+  onRadioChange(event) {
+    this.formType = event.value
   }
 
 }

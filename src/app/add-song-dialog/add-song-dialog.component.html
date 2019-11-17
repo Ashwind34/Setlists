@@ -1,8 +1,14 @@
 <h2 mat-dialog-title>Add / Edit Song</h2>
+<mat-radio-group (change)="onRadioChange($event)">
+  <mat-radio-button id="song" value="song" checked="true">Add Song</mat-radio-button>
+  <mat-radio-button id="break" value="break">Add Break</mat-radio-button>
+</mat-radio-group>
 
 <form [formGroup]="songForm">
 
-  <div class="row">
+  <!-- fields to show when adding a new song -->
+
+  <div class="row" *ngIf="formType === 'song'">
     <mat-form-field appearance="outline">
       <mat-label>Artist</mat-label>
       <input matInput formControlName="artist">
@@ -17,6 +23,17 @@
       <mat-label>Song</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
+  </div>
+
+  <!-- fields to show when adding a break -->
+
+  <div class ="row" *ngIf="formType === 'break'">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Break Notes</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
   </div>
   <div class="row">
     <div class="timeText">

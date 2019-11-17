@@ -17,6 +17,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
+  MatRadioModule,
 } from '@angular/material';
 import { UserformComponent } from './userform/userform.component';
 import { RegisterComponent } from './register/register.component';
@@ -52,6 +53,7 @@ import { UserService } from './services/user.service';
     MatCardModule,
     MatIconModule,
     HttpClientModule,
+    MatRadioModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
