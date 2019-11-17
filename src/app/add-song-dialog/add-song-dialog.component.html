@@ -1,57 +1,75 @@
-<h2 mat-dialog-title>Add / Edit Song</h2>
-<mat-radio-group (change)="onRadioChange($event)">
-  <mat-radio-button id="song" value="song" checked="true">Add Song</mat-radio-button>
-  <mat-radio-button id="break" value="break">Add Break</mat-radio-button>
-</mat-radio-group>
+<div class="title">
+  <h2 mat-dialog-title *ngIf="formType === 'song'">Add Song</h2>
+  <h2 mat-dialog-title *ngIf="formType === 'break'">Add Break</h2>
+  <mat-radio-group (change)="onRadioChange($event)">
+    <mat-radio-button id="song" value="song" checked="true">Add Song</mat-radio-button>
+    <mat-radio-button id="break" value="break">Add Break</mat-radio-button>
+  </mat-radio-group>
+</div>
 
-<form [formGroup]="songForm">
+<form class="container" [formGroup]="songForm">
 
   <!-- fields to show when adding a new song -->
 
   <div class="row" *ngIf="formType === 'song'">
-    <mat-form-field appearance="outline">
-      <mat-label>Artist</mat-label>
-      <input matInput formControlName="artist">
-    </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Album</mat-label>
-      <input matInput formControlName="album">
-    </mat-form-field>
+    <div class="col-sm-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Artist</mat-label>
+        <input matInput formControlName="artist">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Song</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
+    <div class="col-sm-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Album</mat-label>
+        <input matInput formControlName="album">
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Song</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </div>
   </div>
 
   <!-- fields to show when adding a break -->
 
-  <div class ="row" *ngIf="formType === 'break'">
+  <div class ="row break" *ngIf="formType === 'break'">
 
-    <mat-form-field appearance="outline">
-      <mat-label>Break Notes</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
-
-  </div>
-  <div class="row">
-    <div class="timeText">
-      <div>Song Time:</div>
+    <div class="col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Break Notes</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
     </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Minutes</mat-label>
-      <input type="number" matInput formControlName="runMinutes">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" >
-      <mat-label>Seconds</mat-label>
-      <input type="number" matInput formControlName="runSeconds">
-    </mat-form-field>
   </div>
 
-  </form>
+  <div class="row">
+
+    <div class="col-4" *ngIf="formType === 'song'">
+      <!-- placeholder column -->
+    </div>
+
+    <div class ="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Minutes</mat-label>
+        <input type="number" matInput formControlName="runMinutes">
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field appearance="outline" >
+        <mat-label>Seconds</mat-label>
+        <input type="number" matInput formControlName="runSeconds">
+      </mat-form-field>
+    </div>
+  </div>
+
+</form>
 
 <div class="buttonContainer">
   <button mat-raised-button (click)="addSong()">Add Song</button>
