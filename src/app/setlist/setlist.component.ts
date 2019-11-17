@@ -93,9 +93,9 @@ export class SetlistComponent implements OnInit {
     const dialogRef = this.dialog.open(AddSongDialogComponent);
     dialogRef.afterClosed().subscribe((song) => {
       if (song) {
-        this.songList.push(song);
+        this.songList.unshift(song);
+        this.saveMessage = 'New Song Added!'
       }
-      console.log('The dialog was closed');
     });
   }
 
@@ -114,6 +114,7 @@ export class SetlistComponent implements OnInit {
   //NEED TO ADD LOGIC TO HANDLE CHANGE IN ORDER, OR SONG EDIT
 
   save() {
+    this.saveMessage = null;
     const saveRequests: Observable<any>[] = [];
     this.setList.forEach((song: Song, index) => {
       if (song.id == null) {
@@ -141,12 +142,15 @@ export class SetlistComponent implements OnInit {
   }
 
   deleteFromList(song, index) {
+    this.saveMessage = null;
     this.songList.splice(index, 1);
     if (song.id != null) {
       this.songService.deleteSong(song.id)
         .subscribe(() => {
-          this.saveMessage = "Song deleted!"
+          this.saveMessage = "Song Deleted!"
         })
+    } else {
+      this.saveMessage = "Song Deleted!"
     }
   }
 

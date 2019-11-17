@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-song-dialog',
@@ -29,7 +29,9 @@ export class AddSongDialogComponent implements OnInit {
   addSong() {
     if (this.formType === 'break') {
       this.songForm.controls.artist.setValue('Break')
+      this.songForm.controls.album.setValue('')
     }
+    console.log(this.songForm.value)
     this.dialogRef.close(this.songForm.value);
   }
 
@@ -38,9 +40,12 @@ export class AddSongDialogComponent implements OnInit {
       id: [null],
       artist: [null],
       album: [null],
-      name: [null],
-      runMinutes: [null],
-      runSeconds: [null],
+      name: [null, Validators.required],
+      runMinutes: [null, Validators.required],
+      runSeconds: [null, Validators.required],
+      onSetlist: [0],
+      setOrder: [0],
+      listOrder: [0],
     });
   }
 
