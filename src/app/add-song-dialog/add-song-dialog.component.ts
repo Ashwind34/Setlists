@@ -27,6 +27,9 @@ export class AddSongDialogComponent implements OnInit {
   }
 
   addSong() {
+    if (this.formType === 'break') {
+      this.songForm.controls.artist.setValue('Break')
+    }
     this.dialogRef.close(this.songForm.value);
   }
 
