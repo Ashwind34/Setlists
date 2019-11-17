@@ -27,7 +27,16 @@ export class SetlistComponent implements OnInit {
 
   userId = 1
 
+  dirty: boolean = false;
+
   constructor(public dialog: MatDialog, public songService: SongService) { }
+
+  showLists() {
+    console.log('Setlist')
+    console.log(this.setList)
+    console.log('Songlist')
+    console.log(this.songList)
+  }
 
   ngOnInit() {
     this.loadSongs(this.userId);
@@ -43,7 +52,23 @@ export class SetlistComponent implements OnInit {
       })
   }
 
+  updateSongInfo(song: Song, index: number, containerId?: string) {
+    if (containerId === 'setList') {
+      song.onSetlist = 1;
+      song.setOrder = index;
+      song.listOrder = 0;
+    } else {
+      song.onSetlist = 0;
+      song.setOrder = 0;
+      song.listOrder = index;
+    }
+    this.dirty = true;
+  }
+
   drop(event: CdkDragDrop<any[]>) {
+    const id = event.container.id;
+    const index = event.currentIndex;
+    // let song = event.container.data[index];
     if (event.container === event.previousContainer) {
       moveItemInArray(
         event.container.data,
@@ -58,6 +83,12 @@ export class SetlistComponent implements OnInit {
         event.currentIndex
       )
     }
+    this.updateSongInfo(event.container.data[index], index, id)
+    console.log(event)
+    console.log(event.container.data[index])
+    // console.log(song)
+    console.log(index)
+    console.log(id)
     this.calculateSetTime();
   }
 
@@ -72,13 +103,13 @@ export class SetlistComponent implements OnInit {
   }
 
   add(song, index) {
-    this.setList.push(song);
+    this.setList.unshift(song);
     this.songList.splice(index, 1);
     this.calculateSetTime();
   }
 
   deleteFromSet(song, index) {
-    this.songList.push(song);
+    this.songList.unshift(song);
     this.setList.splice(index, 1);
     this.calculateSetTime();
   }

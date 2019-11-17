@@ -1,5 +1,6 @@
 <h1>SETLIST APP</h1>
 <h2 style="color:red" *ngIf="saveMessage">{{saveMessage}}</h2>
+<h2><button (click)="showLists()">Show Lists</button></h2>
 
 <div class="container">
 
@@ -10,9 +11,9 @@
     </div>
     <div
       cdkDropList
-      #setlist="cdkDropList"
+      id="setList"
       [cdkDropListData]="setList"
-      [cdkDropListConnectedTo]="[songlist]"
+      [cdkDropListConnectedTo]="['songList']"
       class="list"
       (cdkDropListDropped)="drop($event)">
       <div class="songCard" *ngFor="let song of setList, let i = index" cdkDrag>
@@ -41,9 +42,9 @@
     </div>
     <div
       cdkDropList
-      #songlist="cdkDropList"
+      id="songList"
       [cdkDropListData]="songList"
-      [cdkDropListConnectedTo]="[setlist]"
+      [cdkDropListConnectedTo]="['setList']"
       class="list songList"
       (cdkDropListDropped)="drop($event)">
       <div class="songCard" *ngFor="let song of songList, let i = index" cdkDrag>
