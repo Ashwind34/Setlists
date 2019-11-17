@@ -52,6 +52,8 @@ export class SetlistComponent implements OnInit {
       })
   }
 
+  // this does not work - only updates current song, not other songs.  need linked list
+
   updateSongInfo(song: Song, index: number, containerId?: string) {
     if (containerId === 'setList') {
       song.onSetlist = 1;
@@ -66,9 +68,6 @@ export class SetlistComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
-    const id = event.container.id;
-    const index = event.currentIndex;
-    // let song = event.container.data[index];
     if (event.container === event.previousContainer) {
       moveItemInArray(
         event.container.data,
@@ -83,12 +82,10 @@ export class SetlistComponent implements OnInit {
         event.currentIndex
       )
     }
-    this.updateSongInfo(event.container.data[index], index, id)
-    console.log(event)
-    console.log(event.container.data[index])
-    // console.log(song)
-    console.log(index)
-    console.log(id)
+    const id = event.container.id;
+    const index = event.currentIndex;
+    const song = event.container.data[index];
+    // this.updateSongInfo(song, index, id)
     this.calculateSetTime();
   }
 
