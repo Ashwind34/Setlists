@@ -14,9 +14,9 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class SetlistComponent implements OnInit {
 
-  songList = [];
+  songList: Song[] = [];
 
-  setList = [];
+  setList: Song[] = [];
 
   saveMessage: string;
 
@@ -33,9 +33,9 @@ export class SetlistComponent implements OnInit {
 
   showLists() {
     console.log('Setlist')
-    console.log(this.setList)
+    console.dir(this.setList)
     console.log('Songlist')
-    console.log(this.songList)
+    console.dir(this.songList)
   }
 
   ngOnInit() {
@@ -47,25 +47,35 @@ export class SetlistComponent implements OnInit {
       .subscribe((response: Song[]) => {
         response.forEach((item) => {
           item.onSetlist === 1 ? this.setList.push(item) : this.songList.push(item);
+          this.setList.sort(this.sortSongs);
+          this.songList.sort(this.sortSongs);
           this.calculateSetTime();
         })
       })
   }
 
+  sortSongs(a, b) {
+    if (a.onSetlist) {
+      return a.setOrder - b.setOrder;
+    } else {
+      return a.listOrder - b.listOrder;
+    }
+  }
+
   // this does not work - only updates current song, not other songs.  need linked list
 
-  updateSongInfo(song: Song, index: number, containerId?: string) {
-    if (containerId === 'setList') {
-      song.onSetlist = 1;
-      song.setOrder = index;
-      song.listOrder = 0;
-    } else {
-      song.onSetlist = 0;
-      song.setOrder = 0;
-      song.listOrder = index;
-    }
-    this.dirty = true;
-  }
+  // updateSongPosition(song: Song, index: number, containerId?: string) {
+  //   if (containerId === 'setList') {
+  //     song.onSetlist = 1;
+  //     song.setOrder = index;
+  //     song.listOrder = 0;
+  //   } else {
+  //     song.onSetlist = 0;
+  //     song.setOrder = 0;
+  //     song.listOrder = index;
+  //   }
+  //   this.dirty = true;
+  // }
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.container === event.previousContainer) {
@@ -85,7 +95,7 @@ export class SetlistComponent implements OnInit {
     const id = event.container.id;
     const index = event.currentIndex;
     const song = event.container.data[index];
-    // this.updateSongInfo(song, index, id)
+    // this.updateSongPosition(song, index, id);
     this.calculateSetTime();
   }
 
@@ -94,7 +104,7 @@ export class SetlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe((song) => {
       if (song) {
         this.songList.unshift(song);
-        this.saveMessage = 'New Song Added!'
+        this.saveMessage = 'New Song Added!';
       }
     });
   }
@@ -102,12 +112,14 @@ export class SetlistComponent implements OnInit {
   add(song, index) {
     this.setList.unshift(song);
     this.songList.splice(index, 1);
+    // this.updateSongPosition(song, index, 'setList');
     this.calculateSetTime();
   }
 
   deleteFromSet(song, index) {
     this.songList.unshift(song);
     this.setList.splice(index, 1);
+    // this.updateSongPosition(song, index, 'songList');
     this.calculateSetTime();
   }
 
@@ -117,29 +129,35 @@ export class SetlistComponent implements OnInit {
     this.saveMessage = null;
     const saveRequests: Observable<any>[] = [];
     this.setList.forEach((song: Song, index) => {
+      song.setOrder = index;
+      song.listOrder = 0;
+      song.onSetlist = 1;
       if (song.id == null) {
         const { id, ...songData } = song;
-        songData.setOrder = index;
-        songData.listOrder = 0;
-        songData.onSetlist = 1;
         songData.userId = this.userId;
         saveRequests.push(this.songService.addSong(songData));
+      } else {
+        saveRequests.push(this.songService.updateSong(song, song.id));
       }
     });
     this.songList.forEach((song: Song, index) => {
+      song.setOrder = 0
+      song.listOrder = index;
+      song.onSetlist = 0;
       if (song.id  == null) {
         const { id, ...songData } = song;
-        songData.setOrder = 0
-        songData.listOrder = index;
-        songData.onSetlist = 0;
         songData.userId = this.userId;
         saveRequests.push(this.songService.addSong(songData))
+      } else {
+        saveRequests.push(this.songService.updateSong(song, song.id));
       }
     });
     forkJoin(saveRequests).subscribe(() => {
       this.saveMessage = "Your lists have been saved!"
     })
   }
+
+
 
   deleteFromList(song, index) {
     this.saveMessage = null;
