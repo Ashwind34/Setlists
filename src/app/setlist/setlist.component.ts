@@ -77,7 +77,7 @@ export class SetlistComponent implements OnInit {
         event.currentIndex
       )
     }
-    this.calculateSetTime();
+    this.save();
   }
 
   openSongDialog() {
@@ -86,6 +86,7 @@ export class SetlistComponent implements OnInit {
       if (song) {
         this.songList.unshift(song);
         this.saveMessage = 'New Song Added!';
+        this.save();
       }
     });
   }
@@ -93,13 +94,13 @@ export class SetlistComponent implements OnInit {
   add(song, index) {
     this.setList.unshift(song);
     this.songList.splice(index, 1);
-    this.calculateSetTime();
+    this.save();
   }
 
   deleteFromSet(song, index) {
     this.songList.unshift(song);
     this.setList.splice(index, 1);
-    this.calculateSetTime();
+    this.save();
   }
 
   save() {
@@ -131,6 +132,7 @@ export class SetlistComponent implements OnInit {
     });
     forkJoin(saveRequests).subscribe(() => {
       this.saveMessage = "Your lists have been saved!"
+      this.calculateSetTime();
     })
   }
 
@@ -141,9 +143,11 @@ export class SetlistComponent implements OnInit {
       this.songService.deleteSong(song.id)
         .subscribe(() => {
           this.saveMessage = "Song Deleted!"
+          this.save();
         })
     } else {
       this.saveMessage = "Song Deleted!"
+      this.save();
     }
   }
 
