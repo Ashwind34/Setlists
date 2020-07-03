@@ -19,6 +19,7 @@
       <div class="songCard" *ngFor="let song of setList, let i = index" cdkDrag>
         <mat-card>
           <mat-card-title>
+            <span>{{i + 1}})&nbsp;</span>
             <span *ngIf="song.artist">{{song.artist}} -&nbsp;</span>
             {{song.name}}
           </mat-card-title>
