@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { forkJoin, Observable } from 'rxjs';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
@@ -14,6 +14,12 @@ import { SnackbarService } from '../services/snackbar.service';
   styleUrls: ['./setlist.component.scss']
 })
 export class SetlistComponent implements OnInit {
+
+  @HostListener('window:beforeunload')
+    onBeforeUnload() {
+      return this.dirty === false;
+    }
+
 
   songList: Song[] = [];
 
@@ -82,6 +88,7 @@ export class SetlistComponent implements OnInit {
       )
     }
     this.calculateSetTime();
+    this.dirty = true;
   }
 
   openSongDialog() {
@@ -90,6 +97,7 @@ export class SetlistComponent implements OnInit {
       if (song) {
         this.songList.unshift(song);
         this.snackbarService.displaySnackBar("New Song Added!", "Dismiss", 2500)
+        this.dirty = true;
       }
     });
   }
@@ -98,12 +106,14 @@ export class SetlistComponent implements OnInit {
     this.setList.unshift(song);
     this.songList.splice(index, 1);
     this.calculateSetTime();
+    this.dirty = true;
   }
 
   deleteFromSet(song, index) {
     this.songList.unshift(song);
     this.setList.splice(index, 1);
     this.calculateSetTime();
+    this.dirty = true;
   }
 
   save() {
@@ -134,20 +144,22 @@ export class SetlistComponent implements OnInit {
       }
     });
     forkJoin(saveRequests).subscribe(() => {
-      this.snackbarService.displaySnackBar("Your lists have been saved!", "Dismiss", 2500)
+      this.snackbarService.displaySnackBar("Your lists have been saved!", "Dismiss", 2500);
+      this.dirty = false;
     })
   }
 
   deleteFromList(song, index) {
-    this.saveMessage = null;
     this.songList.splice(index, 1);
     if (song.id != null) {
       this.songService.deleteSong(song.id)
         .subscribe(() => {
           this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
+          this.save();
         })
     } else {
       this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
+      this.save();
     }
   }
 
