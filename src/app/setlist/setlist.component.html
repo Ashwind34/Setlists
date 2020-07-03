@@ -5,14 +5,14 @@
   <button class="top-button" mat-stroked-button (click)="openSongDialog()">Add A Song</button>
   <button class="top-button" mat-stroked-button (click)="save()">Save Changes</button>
 </div>
-<h4>Current Set List Runtime is {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h4>
+<h4 class="italic">Current set list runtime is {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h4>
 
 
 <div class="container">
 
   <div class="list-container">
     <div class="titlebox">
-      <h3>Set List</h3>
+      <div class="list-title">Set List</div>
     </div>
     <div
       cdkDropList
@@ -40,9 +40,9 @@
     </div>
   </div>
 
-  <div class="list-container songList">
+  <div class="list-container">
     <div class="titlebox">
-      <h3>Song List</h3>
+      <div class="list-title">Song List</div>
     </div>
     <div
       cdkDropList
@@ -53,9 +53,9 @@
       (cdkDropListDropped)="drop($event)">
       <div class="songCard" *ngFor="let song of songList, let i = index" cdkDrag>
         <mat-card>
-          <mat-card-title><span *ngIf="song.artist">{{song.artist}} -&nbsp;</span> {{song.name}}</mat-card-title>
+          <mat-card-title class="italic"><span *ngIf="song.artist">{{song.artist}} -&nbsp;</span> {{song.name}}</mat-card-title>
           <mat-card-content class="songList">
-            <div class="songData">{{song.album}}</div>
+            <div class="songData italic">{{song.album}}</div>
             <div class="songData">{{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}}</div>
             <div class="songData">
               <mat-icon class="green" (click)="add(song, i)">add_box</mat-icon>
