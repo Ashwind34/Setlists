@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { forkJoin, Observable } from 'rxjs';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
-import { SongService } from '../services/song.service';
 import { Song } from '../interfaces/song';
-import { Observable, forkJoin } from 'rxjs';
+import { SongService } from '../services/song.service';
 
 
 @Component({
@@ -62,21 +62,6 @@ export class SetlistComponent implements OnInit {
     }
   }
 
-  // this does not work - only updates current song, not other songs.  need linked list
-
-  // updateSongPosition(song: Song, index: number, containerId?: string) {
-  //   if (containerId === 'setList') {
-  //     song.onSetlist = 1;
-  //     song.setOrder = index;
-  //     song.listOrder = 0;
-  //   } else {
-  //     song.onSetlist = 0;
-  //     song.setOrder = 0;
-  //     song.listOrder = index;
-  //   }
-  //   this.dirty = true;
-  // }
-
   drop(event: CdkDragDrop<any[]>) {
     if (event.container === event.previousContainer) {
       moveItemInArray(
@@ -92,10 +77,6 @@ export class SetlistComponent implements OnInit {
         event.currentIndex
       )
     }
-    const id = event.container.id;
-    const index = event.currentIndex;
-    const song = event.container.data[index];
-    // this.updateSongPosition(song, index, id);
     this.calculateSetTime();
   }
 
@@ -112,18 +93,14 @@ export class SetlistComponent implements OnInit {
   add(song, index) {
     this.setList.unshift(song);
     this.songList.splice(index, 1);
-    // this.updateSongPosition(song, index, 'setList');
     this.calculateSetTime();
   }
 
   deleteFromSet(song, index) {
     this.songList.unshift(song);
     this.setList.splice(index, 1);
-    // this.updateSongPosition(song, index, 'songList');
     this.calculateSetTime();
   }
-
-  //NEED TO ADD LOGIC TO HANDLE CHANGE IN ORDER, OR SONG EDIT
 
   save() {
     this.saveMessage = null;
@@ -156,8 +133,6 @@ export class SetlistComponent implements OnInit {
       this.saveMessage = "Your lists have been saved!"
     })
   }
-
-
 
   deleteFromList(song, index) {
     this.saveMessage = null;
