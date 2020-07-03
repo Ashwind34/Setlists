@@ -171,4 +171,8 @@ export class SetlistComponent implements OnInit {
     this.totalSetTime.seconds = setListSeconds % 60;
     this.totalSetTime.minutes = (setListSeconds - this.totalSetTime.seconds) / 60;
   }
+
+  openPrintPage() {
+    window.open('/print', '_blank')
+  }
 }

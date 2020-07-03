@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>{{bandName}}</h1>
+  <button class="print-button" (click)="print()">Print Set List</button>
+  <ng-container *ngFor="let song of setList, let i = index">
+    <div class="song">{{i+1}}) {{song.name}} -
+      <span class="italic">{{song.artist}}</span> &nbsp;&nbsp;({{song.runMinutes}}:{{song.runSeconds | number:'2.0-0'}})</div>
+  </ng-container>
+</div>
+

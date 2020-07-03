@@ -7,5 +7,7 @@ export class UserService {
 
   isLoggedIn: boolean = false;
 
+  currentUserId: number = 1;
+
   constructor() { }
 }

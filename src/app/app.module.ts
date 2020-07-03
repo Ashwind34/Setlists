@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './services/user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PrintSetlistComponent } from './print-setlist/print-setlist.component';
 
 
 
@@ -35,6 +36,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     UserformComponent,
     RegisterComponent,
     LoginComponent,
+    PrintSetlistComponent,
   ],
   entryComponents: [
     AddSongDialogComponent,
