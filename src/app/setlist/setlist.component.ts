@@ -146,7 +146,11 @@ export class SetlistComponent implements OnInit {
     forkJoin(saveRequests).subscribe(() => {
       this.snackbarService.displaySnackBar("Your lists have been saved!", "Dismiss", 2500);
       this.dirty = false;
-    })
+    },
+    (err) => {
+      this.snackbarService.displaySnackBar(`There was an error.  Please try again`, "Dismiss", 2500);
+      console.log('Error', err);
+    });
   }
 
   deleteFromList(song, index) {
@@ -155,11 +159,9 @@ export class SetlistComponent implements OnInit {
       this.songService.deleteSong(song.id)
         .subscribe(() => {
           this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
-          this.save();
         })
     } else {
       this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
-      this.save();
     }
   }
 
@@ -173,6 +175,6 @@ export class SetlistComponent implements OnInit {
   }
 
   openPrintPage() {
-    window.open('/print', '_blank')
+    window.open('/print', '_blank');
   }
 }

@@ -1,13 +1,18 @@
 <h1>SETLIST APP</h1>
-<h2><button (click)="showLists()">Show Lists</button></h2>
-<h2><button (click)="openPrintPage()">Preview / Print Set List</button></h2>
+<div class="button-container">
+  <button class="top-button" mat-stroked-button (click)="showLists()">Show Lists</button>
+  <button class="top-button" mat-stroked-button (click)="openPrintPage()">Preview / Print Set List</button>
+  <button class="top-button" mat-stroked-button (click)="openSongDialog()">Add A Song</button>
+  <button class="top-button" mat-stroked-button (click)="save()">Save Changes</button>
+</div>
+<h4>Current Set List Runtime is {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h4>
+
 
 <div class="container">
 
   <div class="list-container">
     <div class="titlebox">
       <h3>Set List</h3>
-      <h4>Current Runtume: {{ totalSetTime.minutes }}:{{ totalSetTime.seconds | number:'2.0-0' }}</h4>
     </div>
     <div
       cdkDropList
@@ -38,8 +43,6 @@
   <div class="list-container songList">
     <div class="titlebox">
       <h3>Song List</h3>
-      <button mat-stroked-button (click)="openSongDialog()">Add A Song</button>
-      <button mat-stroked-button (click)="save()">Save Changes</button>
     </div>
     <div
       cdkDropList
