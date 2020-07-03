@@ -23,6 +23,7 @@ import { UserformComponent } from './userform/userform.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './services/user.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -54,6 +55,7 @@ import { UserService } from './services/user.service';
     MatIconModule,
     HttpClientModule,
     MatRadioModule,
+    MatSnackBarModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

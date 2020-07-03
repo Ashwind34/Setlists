@@ -5,6 +5,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { AddSongDialogComponent } from '../add-song-dialog/add-song-dialog.component';
 import { Song } from '../interfaces/song';
 import { SongService } from '../services/song.service';
+import { SnackbarService } from '../services/snackbar.service';
 
 
 @Component({
@@ -29,7 +30,10 @@ export class SetlistComponent implements OnInit {
 
   dirty: boolean = false;
 
-  constructor(public dialog: MatDialog, public songService: SongService) { }
+  constructor(
+    public dialog: MatDialog,
+    public songService: SongService,
+    private snackbarService: SnackbarService) { }
 
   showLists() {
     console.log('Setlist')
@@ -85,7 +89,7 @@ export class SetlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe((song) => {
       if (song) {
         this.songList.unshift(song);
-        this.saveMessage = 'New Song Added!';
+        this.snackbarService.displaySnackBar("New Song Added!", "Dismiss", 2500)
       }
     });
   }
@@ -130,7 +134,7 @@ export class SetlistComponent implements OnInit {
       }
     });
     forkJoin(saveRequests).subscribe(() => {
-      this.saveMessage = "Your lists have been saved!"
+      this.snackbarService.displaySnackBar("Your lists have been saved!", "Dismiss", 2500)
     })
   }
 
@@ -140,10 +144,10 @@ export class SetlistComponent implements OnInit {
     if (song.id != null) {
       this.songService.deleteSong(song.id)
         .subscribe(() => {
-          this.saveMessage = "Song Deleted!"
+          this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
         })
     } else {
-      this.saveMessage = "Song Deleted!"
+      this.snackbarService.displaySnackBar("Song Deleted!", "Dismiss", 2500)
     }
   }
 
